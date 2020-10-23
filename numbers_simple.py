@@ -10,7 +10,7 @@ counter_str = ''
 
 # 1
 while counter <= 99:
-    counter = counter + 1
+    counter += 1
     counter_str = counter_str + str(counter)
 
 print(counter_str)
@@ -19,7 +19,7 @@ print(counter_str)
 counter = 0
 counter_str = ''
 while counter <= number-1:
-    counter = counter + 1
+    counter += 1
     counter_str = counter_str + str(counter)
 
 print(counter_str)
@@ -30,8 +30,8 @@ counter_str = ''
 while counter <= number:
     if counter % 2 == 0 and counter != 0:
         counter_str = counter_str + str(counter)
-        counter = counter + 1
+        counter += 1
     else:
-        counter = counter + 1
+        counter += 1
 
 print(counter_str)
