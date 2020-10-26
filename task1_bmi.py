@@ -12,7 +12,10 @@ surname = input('Введите вашу фамилию - ')
 height = int(input('Введите ваш рост - '))
 weight = int(input('Введите ваш вес - '))
 
+# Перевод роста к нужному виду
 height = height / 100
+
+# Расчет BMI
 bmi = round(weight / (height ** 2), 2)
 
 if bmi < 16:

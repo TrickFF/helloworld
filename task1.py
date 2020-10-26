@@ -33,7 +33,6 @@ else:
 
 #while True:
 #    number = int(input('Введите число от 0 до 10 '))
-#    number = 5
 #    if number > 0 and number < 10:
 #        print('Введеное число во 2й степени составит - ', number**2)
 #        break
