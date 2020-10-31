@@ -5,36 +5,28 @@
 # “загаданное число больше”. Если компьютер назвал число больше, игрок должен выбрать
 # “загаданное число меньше”. Игра продолжается до тех пор пока компьютер не отгадает число.
 
-# Пользователь угадывает число, загаданное компьютером
-
 import random
 
-# Пользователь загадывает число
-
-user_number = int(input('Введите число от 1 до 100 - '))
+# диапазон чисел
 min = 1
 max = 100
 
-# ПК начинает угадывать с середины диапазона
-number = 50
-
-count = 1
+number = 0
+user_number = None
+count = 0
 
 # ПК угадывает число
-while user_number != number:
-    # ПК
-    count += 1
-    if user_number > number:
-        min = number
-        number = random.randint(min+1, max)
-        continue
-    elif user_number < number:
-        max = number
-        number = random.randint(min, max-1)
-        continue
-    else:
-        print(f'ПК угадал ваше число {user_number} за {count} попыток!')
-        exit()
-
-
-print(f'ПК угадал ваше число {user_number} за {count} попыток!')
+try:
+    while user_number != 0:
+        # пользователь указывает угадал ли ПК число, вводя 0, 1 или 2
+        number = random.randint(min, max)
+        user_number = int(input(f'Вы загадали число - {number}? 0(да), 1(больше), 2(меньше) - '))
+        count += 1
+        if user_number == 1:
+            min = number + 1
+        elif user_number == 2:
+            max = number - 1
+    print(f'ПК угадал ваше число {number} за {count} попыток!')
+except:
+    # сообщение в случае, если пользователь указал неверные данные
+    print('Твоя меня обманывать! Игра окончена!')
