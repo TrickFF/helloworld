@@ -1,3 +1,32 @@
+# 1: Создайте функцию, принимающую на вход имя, возраст и город проживания человека.
+# Функция должна возвращать строку вида «Василий, 21 год(а), проживает в городе Москва»
+def data(name, age, city):
+    return f'{name}, {age} год(а), проживает в городе {city}'
+
+# вводим исходные данные
+name = input(f'Введите имя - ')
+age = int(input(f'Введите возраст - '))
+city = input(f'Введите город - ')
+
+print(data(name, age, city))
+
+# 2. Создайте функцию, принимающую на вход 3 числа и возвращающую наибольшее из них.
+numbers = []
+
+# функция, вычисляющая максимум
+def max_number():
+    return max(numbers)
+
+# ввод пользователем чисел
+for i in range(3):
+    number = int(input(f'Введите {i + 1}е число - '))
+    numbers.append(number)
+
+print(f'Максимальное из введеных чисел - {max_number()}')
+
+# Тоже самое через lambla функцию
+print('Максимальное из введеных чисел -', max(numbers, key=lambda number: int(number)))
+
 # 3: Давайте опишем пару сущностей player и enemy через словарь, который будет иметь ключи и значения:
 # name - строка полученная от пользователя,
 # health = 100,
@@ -10,6 +39,7 @@
 
 import random
 
+# создаем словари
 player = {
     'name': '',
     'health': 100,
@@ -26,7 +56,7 @@ enemy = {
 # игрок вводит свое имя
 player['name'] = input('Введите свое имя - ')
 
-
+# функция расчета урона
 def attack(player, enemy):
     # расчитываем урон, как случайное число между минимальным и максимальным воможными значениями урона
     dmg_player = random.randint(player['min_damage'], player['max_damage'])
@@ -36,37 +66,4 @@ def attack(player, enemy):
     return f"{enemy['name']} нанес {dmg_enemy} урона. Здоровье игрока после атаки - {player['health']}. \n" \
            f"{player['name']} нанес {dmg_player} урона. Здоровье врага после атаки - {enemy['health']}."
 
-
 print(attack(player, enemy))
-
-
-# 1: Создайте функцию, принимающую на вход имя, возраст и город проживания человека.
-# Функция должна возвращать строку вида «Василий, 21 год(а), проживает в городе Москва»
-def data(name, age, city):
-    return f'{name}, {age} год(а), проживает в городе {city}'
-
-
-name = input(f'Введите имя - ')
-age = int(input(f'Введите возраст - '))
-city = input(f'Введите город - ')
-
-print(data(name, age, city))
-
-# 2. Создайте функцию, принимающую на вход 3 числа и возвращающую наибольшее из них.
-numbers = []
-
-
-# функция, вычисляющая максимум
-def max_number():
-    return max(numbers)
-
-
-# ввод пользователем чисел
-for i in range(3):
-    number = int(input(f'Введите {i + 1}е число - '))
-    numbers.append(number)
-
-print(f'Максимальное из введеных чисел - {max_number()}')
-
-# Тоже самое через lambla функцию
-print('Максимальное из введеных чисел -', max(numbers, key=lambda number: int(number)))

@@ -1,44 +1,53 @@
-# 3:
+#4: Давайте усложним предыдущее задание. Измените сущности, добавив новый параметр
+# - armor = 1.2 (величина брони персонажа)
+#Теперь надо добавить новую функцию, которая будет вычислять и возвращать полученный урон
+# по формуле damage / armor
+#Следовательно, у вас должно быть 2 функции:
+#Наносит урон. Это улучшенная версия функции из задачи 3.
+#Вычисляет урон по отношению к броне.
+
+#Примечание. Функция номер 2 используется внутри функции номер 1 для вычисления урона
+# и вычитания его из здоровья персонажа.
 import random
 
+# создаем словари
 player = {
     'name': '',
     'health': 100.00,
-    'min_damage': 25.00,
-    'max_damage': 50.00,
-    'armor': 1.2
+    'min_damage': 20,
+    'max_damage': 50,
+    'armor': 1.3
 }
 
 enemy = {
     'name': 'COVID-19',
     'health': 100.00,
-    'min_damage': 1.00,
-    'max_damage': 20.00,
-    'armor': 0.9
+    'min_damage': 10,
+    'max_damage': 50,
+    'armor': 1.1
 }
 # игрок вводит свое имя
 player['name'] = input('Введите свое имя - ')
 
+
+# функция атаки с расчетом урона в зависимости от показателя брони
 def attack(player, enemy):
-    # расчитываем урон, как случайное число между минимальным и максимальным воможными значениями урона
-    dmg_player = random.uniform(player['min_damage'], player['max_damage'])
-    dmg_enemy = random.uniform(enemy['min_damage'], enemy['max_damage'])
-    return dmg_player, dmg_enemy
+    # функция расчета урона
+    def damage(player, enemy):
+        # расчитываем урон, как случайное число между минимальным и максимальным воможными значениями урона
+        dmg_player = random.randint(player['min_damage'], player['max_damage'])
+        dmg_enemy = random.randint(enemy['min_damage'], enemy['max_damage'])
+        return dmg_player, dmg_enemy
 
-def damage_reducion(player, enemy):
-    a = attack(player, enemy)[1]/player['armor']
-    player['health'] -= a
-    b = attack(player, enemy)[0]/enemy['armor']
-    enemy['health'] -= b
-    return f"{enemy['name']} нанес {round(attack(player, enemy)[1], 2)} урона. Получено" \
-           f" {round(a, 2)} урона с учетом брони." \
-           f" Здоровье игрока после атаки - {player['health']}. \n" \
-           f"{player['name']} нанес {round(attack(player, enemy)[0], 2)} урона. Получено " \
-           f"{round(b, 2)} урона с учетом брони." \
-           f"Здоровье врага после атаки - {enemy['health']}."
+    # импоритиуем значения урона из внутренней функции
+    dmg_player, dmg_enemy = damage(player, enemy)
+    # расчитываем урон с учетом брони
+    player['health'] -= dmg_enemy / player['armor']
+    enemy['health'] -= dmg_player / enemy['armor']
+    return f"{enemy['name']} нанес {dmg_enemy} урона. Получено {round(dmg_enemy / player['armor'], 2)}" \
+           f" урона с учетом брони. Здоровье игрока после атаки - {round(player['health'], 2)}. \n" \
+           f"{player['name']} нанес {dmg_player} урона. Получено {round(dmg_player / enemy['armor'], 2)}" \
+           f" урона с учетом брони. Здоровье врага после атаки - {round(enemy['health'], 2)}."
 
 
-#print(attack(player, enemy)[1], attack(player, enemy)[0])
 print(attack(player, enemy))
-print(f"броня - {player['armor']} - {attack(player, enemy)[1]/player['armor']}")
-print(f"броня - {enemy['armor']} - {attack(player, enemy)[0]/enemy['armor']}")
